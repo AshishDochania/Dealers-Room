@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useGetMessagesQuery, useSendMessageMutation } from '../features/message/messageApi';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000'); // or use env var
+const socket = io(process.env.CLIENT_URL); // or use env var
 
 const DealChat = ({ dealId }) => {
   const { user } = useSelector(state => state.auth);
