@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 export const dealApi = createApi({
   reducerPath: 'dealApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/deals',
+    baseUrl: baseURL+'/api/deals',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) headers.set('authorization', `Bearer ${token}`);
