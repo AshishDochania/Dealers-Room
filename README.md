@@ -110,14 +110,14 @@ Challenge:
 Implementing different dashboard experiences for buyers and sellers using React Router based on user roles.
 
 Solution:
-We built a PrivateRoute component that checks the authenticated user's role and conditionally renders either the Buyer or Seller dashboard after login. This provided a clean, role-specific experience.
+I built a PrivateRoute component that checks the authenticated user's role and conditionally renders either the Buyer or Seller dashboard after login. This provided a clean, role-specific experience.
 
 2. Real-Time Chat Integration
 Challenge:
 Maintaining consistent real-time messaging between buyers and sellers, including joining and leaving rooms and syncing new messages across clients.
 
 Solution:
-We used socket.io with room-based architecture, emitting and listening to messages in real-time based on dealId. We also used refetch() on message reception to sync the latest chat on both sides.
+I used socket.io with room-based architecture, emitting and listening to messages in real-time based on dealId. We also used refetch() on message reception to sync the latest chat on both sides.
 
 3. File Uploads with Cloudinary
 Challenge:
@@ -131,7 +131,7 @@ Challenge:
 Integrating Redis in a scalable way to cache frequent operations and avoid unnecessary database hits.
 
 Solution:
-We modularized Redis configuration and replaced direct Redis instantiation with a central config file. Redis was used in middlewares and controllers to cache deal and user data efficiently.
+I modularized Redis configuration and replaced direct Redis instantiation with a central config file. Redis was used in middlewares and controllers to cache deal and user data efficiently.
 
 5. Deployment Issues (Render & Netlify)
 Challenge:
@@ -151,5 +151,10 @@ Handled route fallback using _redirects file on Netlify
 Allowed all IPs temporarily in MongoDB Atlas for smooth deployment
 
 
+## Usage of Chatgpt
+Mostly for code generation of some parts that i was not aware of like redis and socket io.
+Also for understanding how things worked in different files.
+
+Used for basic UI generation 
 
 
