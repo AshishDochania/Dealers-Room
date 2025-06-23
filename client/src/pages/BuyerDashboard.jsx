@@ -19,6 +19,12 @@ const BuyerDashboard = () => {
     <div className="p-6">
       <h1 className="text-2xl font-bold">👤 Buyer Dashboard</h1>
       <p className="text-gray-600 mt-2">Welcome, {user?.name}</p>
+      <button
+          onClick={handleLogout}
+          className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded"
+        >
+          Logout
+        </button>
         <CreateDealForm />
         <DealList />
     </div>
