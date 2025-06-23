@@ -11,6 +11,17 @@ const dealSchema = new mongoose.Schema({
   },
   buyer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  files: [
+    {
+      url: String,
+      filename: String,
+      uploadedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    }
+  ],
+
 }, { timestamps: true });
 
 export default mongoose.model('Deal', dealSchema);
