@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import redis from '../config/redis';
+import redis from '../config/redis.js';
 
 export const protect = async (req, res, next) => {
   let token = req.headers.authorization?.split(' ')[1];
