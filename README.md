@@ -5,6 +5,7 @@ A real-time platform for buyers and sellers to create, accept, and manage busine
 Live Demo 👉 [Frontend](https://glittering-faun-4f98bc.netlify.app/) | [Backend](https://dealers-room.onrender.com)
 
 Seller usercredential -- email-ash@gmail.com , password- ash@gmail
+
 buyer usercredentials -- email- proper@gmail.com, password- proper@gmail
 ---
 
