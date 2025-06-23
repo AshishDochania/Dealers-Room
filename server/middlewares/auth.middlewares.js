@@ -1,13 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Redis from 'ioredis';
-import dotenv from 'dotenv';
-dotenv.config();
-const redis = new Redis({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD,
-  tls: {}, // ✅ include this ONLY if you're using a secure Redis (Upstash, etc.)
-});
+import redis from '../config/redis';
 
 export const protect = async (req, res, next) => {
   let token = req.headers.authorization?.split(' ')[1];
