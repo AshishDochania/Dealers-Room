@@ -15,29 +15,93 @@ const CreateDealForm = () => {
     e.preventDefault();
     try {
       await createDeal(form).unwrap();
-      alert('Deal created!');
+      alert('✅ Deal created!');
       setForm({ title: '', description: '', price: '', sellerId: '' });
     } catch (err) {
-      console.error(err);
+      console.error('❌ Deal creation failed:', err);
+      alert('Failed to create deal.');
     }
   };
 
   if (user?.role !== 'buyer') return null;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 p-4 border rounded">
-      <input name="title" value={form.title} onChange={handleChange} placeholder="Title" className="w-full p-2 border rounded" />
-      <input name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full p-2 border rounded" />
-      <input name="price" value={form.price} onChange={handleChange} placeholder="Price" type="number" className="w-full p-2 border rounded" />
-      <select name="sellerId" onChange={handleChange} value={form.sellerId} className="w-full p-2 border rounded" required>
-        <option value="">Select Seller</option>
-        {sellers.map(seller => (
-          <option key={seller._id} value={seller._id}>
-            {seller.name} ({seller.email})
-          </option>
-        ))}
-      </select>
-      <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">Create Deal</button>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-6 border rounded bg-white shadow-sm mt-6"
+    >
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">📝 Create a New Deal</h3>
+
+      <div className="space-y-1">
+        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+        <input
+          id="title"
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          placeholder="Enter deal title"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+        <input
+          id="description"
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          placeholder="Brief about the deal"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price (₹)</label>
+        <input
+          id="price"
+          name="price"
+          value={form.price}
+          onChange={handleChange}
+          placeholder="e.g. 5000"
+          type="number"
+          min="0"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label htmlFor="sellerId" className="block text-sm font-medium text-gray-700">Select Seller</label>
+        <select
+          id="sellerId"
+          name="sellerId"
+          value={form.sellerId}
+          onChange={handleChange}
+          className="w-full p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        >
+          <option value="" disabled>Select a seller</option>
+          {isLoading ? (
+            <option>Loading sellers...</option>
+          ) : (
+            sellers.map((seller) => (
+              <option key={seller._id} value={seller._id}>
+                {seller.name} ({seller.email})
+              </option>
+            ))
+          )}
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
+      >
+        ➕ Create Deal
+      </button>
     </form>
   );
 };
