@@ -87,6 +87,7 @@ npm run dev
 ```
 
 Backend env's
+
 PORT=5000
 MONGO_URI=<your-mongo-uri>
 JWT_SECRET=supersecretkey
@@ -99,9 +100,55 @@ CLOUDINARY_API_SECRET=...
 
 
 frontend env's
+
 VITE_BASE_URL=https://dealers-room.onrender.com
 VITE_SOCKET_URL=https://dealers-room.onrender.com
 
+
+1. Role-Based Routing & Dashboard Separation
+Challenge:
+Implementing different dashboard experiences for buyers and sellers using React Router based on user roles.
+
+Solution:
+We built a PrivateRoute component that checks the authenticated user's role and conditionally renders either the Buyer or Seller dashboard after login. This provided a clean, role-specific experience.
+
+2. Real-Time Chat Integration
+Challenge:
+Maintaining consistent real-time messaging between buyers and sellers, including joining and leaving rooms and syncing new messages across clients.
+
+Solution:
+We used socket.io with room-based architecture, emitting and listening to messages in real-time based on dealId. We also used refetch() on message reception to sync the latest chat on both sides.
+
+3. File Uploads with Cloudinary
+Challenge:
+Uploading and managing deal-specific files with secure backend integration, while avoiding large local storage.
+
+Solution:
+Used multer for handling multipart form data and uploaded files directly to Cloudinary. We then saved Cloudinary file URLs in MongoDB for efficient access.
+
+4. Redis Integration for Optimization
+Challenge:
+Integrating Redis in a scalable way to cache frequent operations and avoid unnecessary database hits.
+
+Solution:
+We modularized Redis configuration and replaced direct Redis instantiation with a central config file. Redis was used in middlewares and controllers to cache deal and user data efficiently.
+
+5. Deployment Issues (Render & Netlify)
+Challenge:
+
+Backend Redis TLS errors during deployment on Render
+
+404 errors on frontend route refresh (e.g. /dashboard)
+
+MongoDB connection failures due to IP whitelist
+
+Solution:
+
+Adjusted Redis config to work without TLS in production
+
+Handled route fallback using _redirects file on Netlify
+
+Allowed all IPs temporarily in MongoDB Atlas for smooth deployment
 
 
 
